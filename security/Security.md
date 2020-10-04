@@ -1,3 +1,11 @@
+- [왜 Spring Securtiy 인가?](#왜-spring-securtiy-인가)
+  * [Spring Security가 제공하는 기능들](#spring-security가-제공하는-기능들)
+- [Spring Security의 꼭 알아야할 내용](#spring-security의-꼭-알아야할-내용)
+  * [왜 알아야 할까?](#왜-알아야-할까)
+  * [용어](#용어)
+  * [SecurityContextHolder](#securitycontextholder)
+  * [ThreadLocal](#threadlocal)
+  * [헷갈렸던 부분](#헷갈렸던-부분)
 # 왜 Spring Securtiy 인가?
 우선 시큐리티를 적용하기 전에 Form 형식의 회원가입을 통해 Member를 생성하였습니다.
 하지만 '실제 운영해야 할 서비스이기 때문에 개인정보에 대한 보안에 신경 써야 하지 않을까?'라고 생각했고 보안 수준을 높일 방법이 뭐가 있을까 생각을 하였을 때
