@@ -14,7 +14,7 @@ Spring Security는 강력하면서도 쉽습니다. 게다가 단 몇십 줄의 
 Spring Security는 스프링 기반의 애플리케이션에서 보안을 위해 **인증**과 **권한 부여**를 사용하여 **접근을 제어**하는 프레임워크입니다. 또 커스터마이징이 가능합니다.
 
 ## Spring Security가 제공하는 기능들
-![security-features](../images/Security/security_features.png)
+![security-features](../images/security/security_features.png)
 다양한 기능들이 있습니다. 만약 Spring Security를 적용하지 않는다면 위의 기능들 중 필요한 부분을 모두 손수 다 구현해야 한다는 것입니다.
 
 **그러니 안 쓸 이유가 없겠죠?**
@@ -57,7 +57,7 @@ Spring Security를 이용하지 않고 RestTemplate이나 WebClient로 OAuth를 
 - 권한(authorities) : 유저에게 주어지는 권한입니다. 예를들어 roles, scopes  
 
 ## SecurityContextHolder
-![SecurityContextHolder](../images/Security/securitycontextholder.png)
+![SecurityContextHolder](../images/security/securitycontextholder.png)
 레퍼런스에 보면 SecurityContextHolder 를 다음과 같이 표현합니다.
  
 >At the heart of Spring Security’s authentication model is the SecurityContextHolder
@@ -112,9 +112,9 @@ static으로 선언하면 해시값이 항상 같기 때문에 하나의 ThreadL
 아래 ThreadLocalSecurityContextH 클래스를 확인해 보면 알 수 있습니다.
 
 - ThreadLocalSecurityContextHolderStrategy
-![ThreadLocalSecurityContextHolderStrategy](../images/Security/thread.png)
+![ThreadLocalSecurityContextHolderStrategy](../images/security/thread.png)
 - ThreadLocal 
-![ThreadLocal](../images/Security/threadLocal.png)
+![ThreadLocal](../images/security/threadLocal.png)
 
 또 Spring Docs에 보면 이런 말이 있습니다.
 > Using a ThreadLocal in this way is quite safe if care is taken to clear the thread after the present principal’s request is processed. Spring Security’s FilterChainProxy ensures that the SecurityContext is always cleared.
