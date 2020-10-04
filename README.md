@@ -12,6 +12,17 @@
 ## 기술 스택
 ![stack](images/stack.png)
 
+## 프로젝트 아키텍처
+![project_architectures](images/project_architectures.png)
+## CI/CD
+![CICD](images/CICD.png)
+- CI
+    - 정기적인 빌드 및 테스트(유닛테스트 및 통합테스트)를 거쳐 공유 레포지터리에 병합되는 과정
+- CD
+    - 레포지터리에서 실시간으로 프로덕션 환경으로 배포하는 작업을 자동화하는 것     
+
+사용자의 피드백을 적극 반영하기 위해 짧은 주기로 서비스를 배포하고 있습니다.
+잦은 빌드와 배포로 인해 번거로움을 느꼈고 CI/CD 환경을 구성하여문제를 해결하였습니다.
 ## 패키지 구조
 ```gherkin
 api
@@ -124,15 +135,15 @@ JPA를 학습하고 적용해보고 싶었던 우리는 DDD 에 맞게 단순히
 
 프로젝트에서 혼자서 맡게 된 기술들입니다. 새로운 기술을 적용하면서 공부했던 방법과 내용, 고민들을 공유하겠습니다.
 
-# Spring Securtiy(OAuth2 적용기)
-## 왜 Spring Securtiy 인가?
+## Spring Securtiy(OAuth2 적용기)
+### 왜 Spring Securtiy 인가?
 우선 시큐리티를 적용하기 전에 Form 형식의 회원가입을 통해 Member를 생성하였습니다.
 하지만 '실제 운영해야 할 서비스이기 때문에 개인정보에 대한 보안에 신경 써야 하지 않을까?'라고 생각했고 보안 수준을 높일 방법이 뭐가 있을까 생각을 하였을 때
 간단하지만 강력하게 구현 할 수 있는 이미 높은 보안 수준을 구축해둔 Spring Security를 사용하기로 선택했습니다.
 Spring Security는 강력하면서도 쉽습니다. 게다가 단 몇십 줄의 코드만으로도 대형 웹서비스 사와 비슷한 수준의 보안을 유지할 수 있다는 장점이 있습니다.
 Spring Security는 스프링 기반의 애플리케이션에서 보안을 위해 **인증**과 **권한 부여**를 사용하여 **접근을 제어**하는 프레임워크입니다. 또 커스터마이징이 가능합니다.
 
-## Spring Security가 제공하는 기능들
+### Spring Security가 제공하는 기능들
 ![security-features](images/security_features.png)
 다양한 기능들이 있습니다. 만약 Spring Security를 적용하지 않는다면 위의 기능들 중 필요한 부분을 모두 손수 다 구현해야 한다는 것입니다.
 
@@ -149,8 +160,8 @@ Spring Security를 이용하지 않고 RestTemplate이나 WebClient로 OAuth를 
     - [Spring Security 스프링 시큐리티](https://sieunlim.tistory.com/19)
     - [Spring Security Docs](https://docs.spring.io/spring-security/site/docs/5.1.5.RELEASE/reference/htmlsingle/#hello-web-security-java-configuration)
 
-## Spring Security의 구동원리, 아키택처
-### 왜 알아야 할까?
+### Spring Security의 구동원리, 아키택처
+#### 왜 알아야 할까?
 OAuth를 적용하기 전에 먼저 Spring Security의 구동원리와 아키텍처에 대해 먼저 학습하였습니다. 처음에는 무턱대로 블로그의 글을 복붙하는 형식이였습니다.
 코드를 그런식으로 긁어와 사용하니 그에 따른 부작용은 더욱 컸습니다. 여러 부작용들이 많았지만 가장 큰 두가지를 공유하겠습니다.
 
@@ -161,7 +172,7 @@ OAuth를 적용하기 전에 먼저 Spring Security의 구동원리와 아키텍
 
 **먼저 Spring Security 를 알기 전에 미리 알아가고 들어가야할 개념 몇가지를 소개하겠습니다.**
 
-## 용어
+#### 용어
 용어에 대해 먼저 알아보겠습니다. 그 나라의 언어를 모른다면 의사소통이 가능할까요? 시큐리티를 잘 이해하기 위해선 먼저 알고가야한다 생각합니다. 
 - 접근 주체(Principal): 보호된 대상에 접근하는 유저
 - 인증(Authenticate): 요청을 보낸 유저가 누구인지 확인(ex. 로그인), 애플리케이션의 작업을 수행할 수 있는 주체임을 증명
@@ -171,8 +182,9 @@ OAuth를 적용하기 전에 먼저 Spring Security의 구동원리와 아키텍
         - 권한 부여에도 두 가지 영역이 존재하는데 웹 요청 권한, 메소드 호출 및 도메인 인스턴스에 대한 접근 권한 부여가 있음
     +)인증과 권한을 구분해 생각하는 것이 스프링 시큐리티를 이해하는데 가장 중요합니다.
 - 증명서(Credential) : 인증 과정 중, 주체가 본인을 인증하기 위해 서버에 제공하는 것. (ID, Password 같은 것)
+- 권한(authorities) : 유저에게 주어지는 권한입니다. 예를들어 roles, scopes  
 
-## SecurityContextHolder
+#### SecurityContextHolder
 ![SecurityContextHolder](images/securitycontextholder.png)
 레퍼런스에 보면 SecurityContextHolder 를 다음과 같이 표현합니다.
  
@@ -215,7 +227,7 @@ Spring Security는 SecurityContextHolder 에 저장된 내용을 인가(Authoriz
 
 - [Spring Security Docs](https://docs.spring.io/spring-security/site/docs/current/reference/html5/#servlet-authentication-securitycontextholder)
 
-## ThreadLocal
+#### ThreadLocal
 SecurityContextHolder를 이해하는 데 꼭 필요하다고 생각합니다. SecurityContextHolder는 전략적으로 어떻게 사용할 것인지 정해집니다.
 디폴드 값은 ThreadLocal 로 사용됩니다. ThreadLocal 이란 간단히 설명해서 스레드 지역 변수입니다. 같은 Thread 하는 Scope 내에서 공유되어 사용될 수 있는 값으로 **다른 스레드**에서
 공유변수에 접근할 시 발생할 수 있는 **동시성 문제의 예방**을 위해 만들어졌습니다. Security의 ThreadLocalSecurityContextH 클래스를 보면
@@ -240,7 +252,7 @@ Context를 get을 하는데 만약 스레드가 비어있지 않는다면 쓰레
 
 따라서 다른 인증요청이 와도 이미 TheadLocal에 이전에 사용된 인증객체가 있어서 새로운 인증 요청이 와도 인증된 사용자라고 인증 허가를 내줄 것입니다.
 
-## 헷갈렸던 부분
+#### 헷갈렸던 부분
 - SecurityContextHolder 와 Session
     - SecurityContextHolder 는 Spring Security의 인메모리 세션저장소 입니다.
     시큐리티의 설정중에 인증과정시 Session을 끄는 설정이 있습니다.
@@ -285,8 +297,8 @@ Context를 get을 하는데 만약 스레드가 비어있지 않는다면 쓰레
     - [session 이란](https://devhaks.github.io/2019/04/20/session-strategy/)
     - [ThreadLocal 을 사용하는 이유](https://brunch.co.kr/@sbcoba/11)
 
-## Spring Security 구조
-### 필터 동작원리
+### Spring Security 구조
+#### 필터 동작원리
 ![filterChain](images/filterChain.png)
 
 Spring Security는 서블릿 필터 기반이라 먼저 필터의 역할을 알고 간다면 많은 도움이 될 것입니다.
@@ -294,7 +306,7 @@ Spring Security는 서블릿 필터 기반이라 먼저 필터의 역할을 알�
 다음 필터에서 쓸HttpServletRequest 와 HttpServletResponse 수정합니다.
 Chain으로 연결되어있기 때문에 순서가 중요합니다.
 
-### DelegatingFilterProxy
+#### DelegatingFilterProxy
 Spring의 ApplicationContext와 Servlet Container의 lifecycle 의 사이를 연결해주는 역할을 합니다.
 Servlet Container는 그들의 표준에 따라 필터를 등록하는데 스프링 빈에 대해서는 인지하지 못합니다. 따라서
 DelegatingFilterProxy 가 Servlet Container 표준을 통해 Bean을 필터로 등록해주는 역할을 합니다.
@@ -305,7 +317,7 @@ Filter는 Servlet Container가 시작되기 전에 필터를 등록할 필요가
 
 > Another benefit of DelegatingFilterProxy is that it allows delaying looking Filter bean instances. This is important because the container needs to register the Filter instances before the container can startup. However, Spring typically uses a ContextLoaderListener to load the Spring Beans which will not be done until after the Filter instances need to be registered.
 
-### FilterChainProxy
+#### FilterChainProxy
 FilterChainProxy 는 Spring Security에 의해 관리되는 특수한 필터입니다. FilterChainProxy 는 SecurityFilterChain를 통해서 많은 필터들에 역할을 위임합니다.
 FilterChainProxy 는 Bean이기 때문에 DelegatingFilterProxy에 의해 관리됩니다(wrapped in).
 
@@ -355,7 +367,7 @@ config를 만들어 order로 설정해야 합니다.
     - [DelegatingFilterProxy FliterChainProxy 빈주입 어떻게?](https://yoon0120.tistory.com/47)
     - [Spring Bean 주입](https://loginfo.dev/SpringBeanLifeCycle)
     
-### 공부하다 알게 된 내용 context
+#### 공부하다 알게 된 내용 context
 이 부분을 공부하다가 context에 대해 자세하게 알게 되었습니다. Spring에서 관리하는 context로
 ApplicationContext 와 ApplicationContext를 상속받은 WebApplicationContext 가 있습니다.
 WebApplicationContext은 다시 root WebApplicationContext와 Servlet WebApplicationContext 으로 나뉩니다.
@@ -369,14 +381,14 @@ WebApplicationContext는 ServletContext를 조합으로 갖고 있습니다. 이
     - [서블릿과 스프링에서 Context(컨텍스트)란?](https://linked2ev.github.io/spring/2019/09/15/Spring-5-서블릿과-스프링에서-Context(컨텍스트)란/)
     - [stackoverflow](https://stackoverflow.com/questions/31931848/applicationcontext-and-servletcontext)
 
-### ExceptionTranslationFilter
+#### ExceptionTranslationFilter
 AccessDeniedException과 AuthenticationException을 처리하는 필터입니다. 핵심 메서드는 HandleSpringSecurityException()입니다.
 해당 필터가 실행되면 doFilter로 바로 넘어갑니다. 만약 인증 과정 중 AuthenticationException 예외가 발생한다면, AuthenticationEntryPoint를 실행하여 인증을 유도합니다.
 
 HandleSpringSecurityExcepti() 내부에서 일어나는 일들입니다.
 1. SecurityContext Clear off
 2. request cache에 HttpServletRequest를 저장해두고 인증에 다시 성공했을 때 가져와서 씁니다.
-3. credentials 을 요청하기 위해 AuthenticationEntryPoint 를 사용합니다. 예를 들어 log in 페이지로 rediect 하거나 헤더에 WWW-Authenticate를 보냅니다.
+3. credentials 을 요청하기 위해 AuthenticationEntryPoint 를 사용합니다. 예를 들어 log in 페이지로 rediect 와 헤더에 WWW-Authenticate를 보냅니다.
 
 - 인증 과정 중 AuthenticationException 예외가 발생한다면, AuthenticationEntryPoint를 실행하여 인증을 유도한다.
 - 인가 과정 중 AccessDeniedException 예외가 발생하면 먼저 현재 Authentication이 익명 사용자인지 확인합니다.
@@ -398,7 +410,7 @@ ExceptionTranslationFilter가 모든 SecurityFilter의 AuthenticationException, 
 - 참고
     - [엔푸푸](https://pupupee9.tistory.com/112)
 
-#### 해당 필터 관련 troubleShooting
+##### 해당 필터 관련 troubleShooting
 JwtAuthentocationFilter를 만들때 계속 AuthenticationException를 캐치를 못 하는 상황이 발생했었습니다.
 원인은 OncePerRequestFilter 내부 doInternalFilter 메서드에 있었습니다. 코드를 보면 해당 doInternalFilter가 try catch로 감싸죠 있었습니다.
 ![doInternalFilter](images/doInternalFilter.png)
@@ -408,14 +420,14 @@ JwtAuthentocationFilter를 만들때 계속 AuthenticationException를 캐치를
 - 참고
     - [OncePerRequestFilter 와 일반 Filter 의 차이점은 무엇일까요?](https://github.com/TheDevLuffy/TIL/issues/11)
 
-### FilterSecurityInterceptor
+#### FilterSecurityInterceptor
 FilterChainProxy가 호출하는 Filter중 하나입니다. 대부분은 가장 마지막에 사용되고 어떤 리소스에 접근하기 전 마지막에 AccessDecisionManager를 사용하여 인가처리를 하는 필터입니다.
-#### FilterSecurityInterceptor의 프로세스
+##### FilterSecurityInterceptor의 프로세스
 - doFilter
     - FilterSecurityInterceptor도 Filter이기 때문에 doFilter 메서드가 호출됩니다.
     - doFilter 메서드에서는 FilterSecurityInterceptor의 invoke메서드를 호출하게 됩니다.
-invoke 메서드에서 부모 클래스인 AbstractSecurityInterceptor의 method 호출을 통해 인가 처리를 진행합니다.
-#### AbstractSecurityInterceptor
+    invoke 메서드에서 부모 클래스인 AbstractSecurityInterceptor의 method 호출을 통해 인가 처리를 진행합니다.
+##### AbstractSecurityInterceptor
 FilterSecurityInterceptor 의 부모클래스이고 accessDecisionManager를 호출하여 인가합니다.
 어떤 리소스에 접근하더라도 이 Filter가 동작하는데 인가에 실패한다면 AccessDeniedException 이벤트를 발생시키고
 해당 예외를 처리하는 ExceptionHandling Filter가 존재하고 해당 필터가 처리를 하게 되고, 로그인페이지로 리다이렉트합니다.
@@ -457,6 +469,9 @@ httpSession을 사용하지 않는다면 HttpSession에서 조회학고 저장�
 ##### AuthenticationManager
 ![AuthenticationManager](images/AuthenticationManager.png)
 AuthenticationManager는 어떻게 Spring Security의 필터가 Authentication을 수행할지 정의해둔 API 입니다.
+> If you are not integrating with Spring Security’s Filters you can set the SecurityContextHolder directly and are not required to use an AuthenticationManager
+
+Spring Security의 필터들과 통합하지 않고 인증을 하기 위해선 그냥 SecurityContextHolder 에 바로 저장하면 된다고 앞서 말씀드린 것처럼 나와있네요 :)
 
 ```java
 public interface AuthenticationManager {
@@ -479,10 +494,16 @@ AuthenticationException은 Runtime Exception입니다. 해당 Exception은 유�
 
 ##### ProviderManager
 AuthenticationManager의 가장 일반적인 구현체로 스프링에서 인증을 담당하는 클래스로 볼 수 있습니다.
-(Spring Security가 직접 관리하는 빈이기때문에 따로 구현해줄 필요가 없습니다.)
+(Spring Security가 직접 관리하는 빈이기때문에 따로 구현해줄 필요가 없습니다. 직접 구현하는 경우는 매우 드믈다고 합니다.)
 하지만 직접 인증 과정을 진행하는게 아니라 멤버 변수로 가지고 있는 `private List<AuthenticationProvider> providers;`
 들을에게 support()로 인증가능한지 묻고 가능하면 인증을 위임처리하고 그 중에 하나의 AuthenticationProvider(명확하게는 AuthenticationProvider를 구현한 클래스)객체가 인증 과정을 거쳐서 인증에 성공하면 요청에 대해서
-ProviderManager가 인증이 되었다고 알려주는 방식입니다. 즉 같은 애플리케이션이라도 인증방법을 여러가지 메커니즘으로 갖을 수 있습니다.
+ProviderManager가 UserDetailsService(저희 서비스는 OAuth2UserService를 사용합니다.)에서 비밀번호와 같은 정보를 세션에 오랫동안 저장하지 않기 위해 새로운 Authentication을 리턴합니다.
+즉 같은 애플리케이션이라도 인증방법을 여러가지 메커니즘으로 갖을 수 있습니다.
+
+**Authentication 객체의 타입마다 처리할 수 있는 Provider가 다르기 때문입니다.**
+- UsernameAuthenticationToken 는 UsernamePasswprdAuthenticationFilter
+- OAuth2LoginAuthentication 는 OAuth2LoginAuthenticationFilter
+
 인증이 되었다고 알려주는 건 AuthenticationManager 인터페이스의 메서드인 authenticate() 메서드의 리턴 값인 Authentication객체 안에 인증 값을 넣어주는 것으로 처리합니다.
 ```java
 public interface AuthenticationProvider {
@@ -492,25 +513,69 @@ public interface AuthenticationProvider {
 	boolean supports(Class<?> authentication);
 }
 ```
-parent provider 를 Optional 하게 갖을 수 있습니다.모든 등록된 List 로 등록된 프로바이더가 support() 할게 없다면 parent provider를 호출합니다.
+parent provider 를 Optional 하게 갖을 수 있습니다. 모든 등록된 List 로 등록된 프로바이더가 support() 할게 없다면 parent provider를 호출합니다.
 ![AuthenticationManager_hierarchy](images/AuthenticationManager_hierarchy.png)
-모든 provider가 실패했을때 parant가 존재한다면 parant를 실행히키고 이마저도 실패한다면 Exception을 터트립니다.  
-특정 provider의 예비역할로 쓸 수 있습니다.
+모든 provider가 실패했을때 parant가 존재한다면 parant를 실행히키고 이마저도 실패한다면 Exception을 터트립니다.
+
 
 AuthenticationManager를 커스텀 하기 위해선 global Authentication을 해주려면 @Autowired를
-@Override를 해주면 local Authentication
+local Authentication는 @Override를 해주면 설정 가능합니다. 
+```java
+@Configuration
+public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 
-Spring boot 에서 설정하지 않는다면 디폴트 global AuthenticationProvider(parent)를 제공한다.
-parent 가 필요하지 않다면 **당신이 그것에 대해 크게 걱정할 필요가 없을 만큼 충분히 안전하다.** 라고 래퍼런스에 나와있습니다.
+   ... // web stuff here
 
+  @Autowired
+  public void initialize(AuthenticationManagerBuilder builder, DataSource dataSource) {
+    builder.jdbcAuthentication().dataSource(dataSource).withUser("dave")
+      .password("secret").roles("USER");
+  }
 
-![](images/DI_provider.png)
-DaoAuthenticationProvider에서는 UserDetailsService를 주입 받아 비밀번호 대조 및 회원 정보 가져오기를 수행합니다. 
-여기서도 DI의 위대함을 볼 수 있다.
+  @Override
+    public void configure(AuthenticationManagerBuilder builder) {
+      builder.jdbcAuthentication().dataSource(dataSource).withUser("dave")
+        .password("secret").roles("USER");
+    }
+
+}
+```
+
+여기서 @Autowired는 ConfigGlobal 내의 AuthenticationManagerBuilder를 주입 받겠다는 뜻입니다.
+parent는 없어도 괜찮습니다. local AuthenticationManager를 잘 등록해주면 됩니다.
+왜인지모르겠는데 FormLogin은 local AuthenticationManager 설정을 해주어야하고 OAuthLogin() 을 사용하면 자동으로 local AuthenticationManager 등록을 해줍니다.
+![OAuth2LoginConfigureation](images/OAuth2LoginConfigureation.png)
 
 **ProviderManager.java** 의 authenticate(Authenticate )를 보면 흐름을 알 수 있습니다.
 
+### AbstractAuthenticationProcessingFilter
+AbstractAuthenticationProcessingFilter 는 유저의 credentials를 인증하기 위해서 사용되는 필터입니다.
 
+credentials이 인증되기 전에, Spring Security는 보통 AuthenticationEntryPoint를 사용해 credentials 을 요청합니다.
+
+인증이 완료되었다면 Parent (AbstractAuthenticationProcessingFilter)로 이동합니다.
+- attemptAuthentication()
+    - TemplateMethod Pattern이 적용되어있습니다.
+        - 부모의 일부분을 자식이 구현하는 구조
+- 인증이 완료된 뒤에는 기존에 요청을 했던 URL로 보냅니다.
+![AbstractAuthenticationProcessingFilter](images/AbstractAuthenticationProcessingFilter.png)
+
+1. credentials 이 주어지면 AbstractAuthenticationProcessingFilter는 HttpServletRequest에서 Authentication을 만듭니다.
+만들어진 Authentication 타입은 AbstractAuthenticationProcessingFilter에 따라 다릅니다.
+예를들어  UsernamePasswordAuthenticationFilter는 UsernamePasswordAuthenticationToken을 만듭니다.
+2. 그 후 AuthenticationManager(ProviderManger) 에게 위임합니다.
+3. 만약 인증이 실패할 경우 
+    1. SecurityContextHolder를 clear 합니다.
+    2. RememberMeAuthenticationFilter를 사용하면 RememberMeServices.loginFail 를 호출합니다.
+    3. AuthenticationFailureHandler가 호출됩니다.
+4. 인증이 성공할 경우
+    1. SessionAuthenticationStrategy에 새로운 로그인에 대해 알립니다.       
+    2. SecurityContextHolder에 SecurityContext를 저장합니다.
+    3. 세션을 사용하면 SecurityContextPersistenceFilter는 HttpSession에 SecurityContext를 저장합니다.
+    4. RememberMeAuthenticationFilter 사용하면 RememberMeServices.loginSuccess를 호출합니다.
+    5. AuthenticationSucessHandler가 호출됩니다.
+
+RememberMeAuthenticationFilter는 RememberMeToken을 사용할때 로그인 세션을 오랫동안 유지하기 위해 사용됩니다.
 
 ### Filter 기반의 Spring Security(JwtAuthenticationToken)
 Spring Security는 Filter 기반으로 이루어져 있습니다.
