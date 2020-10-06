@@ -126,7 +126,7 @@ OAuth2 의 경우 Default AuthenticationEntryPoint 는 /oauth/authentication입�
 ### 주의
 ExceptionTranslationFilter가 모든 SecurityFilter의 AuthenticationException, AccessDeniedException예외 처리를 담당하는 것은 아닙니다.
 만약 AbstractAuthenticationProce 를 상속받은 필터에서 AuthenticationException이 터진다면 내부에서 catch로 잡아 unsuccessfulAuthentication 를 실행시킵니다.
-저희 서비스에서는 OAuth2를 사용하기 때문에 OAuth2LoginAuthenticationFi 에서 catch 될 것입니다.
+저희 서비스에서는 OAuth2를 사용하기 때문에 OAuth2LoginAuthenticationFilter 에서 catch 될 것입니다.
 - AbstractAuthenticationProcessingFilter_doFilter
 ![AbstractAuthenticationProcessingFilter_doFilter](../images/security/AbstractAuthenticationProcessingFilter_doFilter.png)
 - unsuccessfulAuthentication
@@ -346,7 +346,7 @@ Spring Security의 인가처리 구조는 다음과 같습니다.
 - 참고
     - [docs](https://docs.spring.io/spring-security/site/docs/5.3.3.BUILD-SNAPSHOT/reference/html5/#servlet-authentication)
     - [엔푸푸](https://pupupee9.tistory.com/112)
-    - [사용자인증은 어디서 어떻게 할까?](https://sungminhong.github.io/spring/security/#2-spring-security의-구조)
+    - [사용자인증은 어디서 어떻게 할까?](https://sungminhong.github.io/spring/security/)
 ## Filter 기반의 Spring Security(JwtAuthenticationToken)
 Spring Security는 Filter 기반으로 이루어져 있습니다.
 

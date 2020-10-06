@@ -99,7 +99,9 @@ chat
   * [프로젝트에서 맡은 주된 업무](#프로젝트에서-맡은-주된-업무)
     + [Front](#front)
     + [Back](#back)
-  * [Spring Securtiy (OAuth2 적용기)](#spring-securtiy-oauth2-적용기)
+  * [Spring Securtiy](#spring-securtiy)
+  * [HTTPS](#https)
+  * [고민들](#고민들)
   
 ## 도메인 설계
 첫 도메인 설계 때 많은 회의를 하였습니다. 그중 가장 화두가 됐던 것은 **DDD 패턴을 적용할까?** 입니다.
@@ -137,16 +139,22 @@ JPA를 학습하고 적용해보고 싶었던 우리는 DDD 에 맞게 단순히
 - React Native, Expo, TypeScript, Recoil, Axios
     - 프론트는 팀원 모두 학습하며 진행해야 했기 때문에 이슈를 골고루 가져갔습니다.
 ### Back
-- Spring Securtiy(OAuth2), Nginx, Https, Logback
+- Spring Securtiy, Nginx, Https
 
 프로젝트에서 혼자서 맡게 된 기술들입니다. 새로운 기술을 적용하면서 공부했던 방법과 내용, 고민들을 공유하겠습니다.
 
-## Spring Securtiy (OAuth2 적용기)
+## Spring Securtiy
 🔒[Spring Security란?](security/Security.md)
 
 🔑[Spring Security Architectures](security/SecurityArchitectures.md)
 
-🤵[Spring Security OAuth2]()
+### HTTPS
+
+🔒[HTTPS](security/https.md)
+
+### 고민들
+
+🤵[고민들](security/TroubleShoot.md)
 
 # Level 4
  * [도메인](#도메인)
@@ -155,3 +163,6 @@ JPA를 학습하고 적용해보고 싶었던 우리는 DDD 에 맞게 단순히
 ![Lv4도메인](images/Lv4_domain.png)
 ### 추가된 도메인
 ![Lv4도메인](images/Lv4_additional_domain.png)
+
+### 변경사항
+- nginx 설정을 좀 더 환경에 맞게 변경해보자 
