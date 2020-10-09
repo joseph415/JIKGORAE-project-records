@@ -354,7 +354,7 @@ Spring Security는 Filter 기반으로 이루어져 있습니다.
 
 처음에 JWT를 사용했던 우리 팀의 로그인 프로세스는 dispatcher Servlet을 넘어와 Interceptor에서 요청을 가로채 token의 유효성 검사를 하는 형태였습니다.
 
-application context가 아닌 Spring context에서 요청에 대해 유효성을 판단하고 있었습니다.
+Spring context에서 요청에 대해 유효성을 판단하고 있었습니다.
 
 저는 이런 형태가 맞지 않는다고 생각했습니다. Spring MVC와 분리되어 동작하는 Security를 사용하므로 Filter에서 인증과 인가를 처리하는데 그 후 다시 Spring MVC의
 Intercept에서 토큰의 유효성 검사해 또 인증 인가를 한 번 더 처리하는 프로세스가 이상하게 느껴졌습니다.
