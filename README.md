@@ -7,7 +7,7 @@
 > 따뜻한 교류가 있는 조직 벼룩시장을 꿈꾸다
 
 - [직고래 Github](https://github.com/woowacourse-teams/2020-seller-lee-company)
-- [직고래 소개](https://sites.google.com/woowahan.com/wooteco-demo/직고래/)
+- [직고래 소개](https://sites.google.com/woowahan.com/wooteco-demo/직고래)
 
 ## 기술 스택
 ![stack](images/stack.png)
