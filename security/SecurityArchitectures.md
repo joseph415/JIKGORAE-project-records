@@ -99,10 +99,32 @@ root는 모든 servlet에서 공통으로 공유할 수 있는 Bean을 의미합
 비즈니스 서비스와 같이 다른 Servlet 객체에서도 필요한 infrastructure 빈들을 넣습니다. root 가 없다면 Servlet WebApplicationContext 가 root입니다.
 WebApplicationContext는 ServletContext를 조합으로 갖고 있습니다. 이는 Servlet Container와 연결하기 위함입니다.
 
-**Servlet Context에서 관리 되는 Filter와 Spring이 링크 될 수 있었던 이유입니다. WebApplicationContext 가 ServletContext를 갖고 있었기 때문입니다.** 
+**Servlet Context에서 관리 되는 Filter와 Spring이 링크 될 수 있었던 이유입니다. WebApplicationContext 가 ServletContext를 갖고 있었기 때문입니다.**
+
+### dispatcherServlet 을 2개 이상 쓰는 상황
+```gherkin
+dispatcher servlet을 2개 두는 구조는 Spring Context가 Root Context와 Servlet Context 
+이렇게 2개로 분리되는 상황에서 Servlet Context를 2개 두려고 할때 사용하는 구조입니다.
+
+이렇게 구조를 잡는 경우는 서버쪽 로직은 하나로 통일되어 있지만 그걸 표현하는 클라이언트가 여러가지 일때 사용하는 구조에요.
+예를 들어 DB에서 데이터를 조회할때 서버는 조회하는 기능은 같은 기능이지만 표현을 웹페이지로도 보여줄수 있고
+또는 restful 형태로 입력을 받아 해당 데이터는 json으로 변환해서 response body에 이렇게 분리해서 보낼수도 있죠.
+그럴때 웹페이지쪽으로 처리하는 controller로만 묶어서 그걸로 하나의 dispatcher servlet을 구현할 수 있고, 
+restful 쪽 controller만 하나로 묶어서 할 수 있죠.
+이런 상황은 아무때나..한다기 보단..웹페이지와 restful이 거의 1대1 대응 형태로 이루어져 나름 분리해서 관리해야 될 필요성이 있을때 그렇게 하는 편입니다.
+
+이렇게 하는 것은 spring 3.x 대에서는 이렇게 하는 식으로 분리해서 운영하면 관리하기도 좋았지만.
+spring 3.1에서 profile이 생기면서 환경에 따라 별도로 분리해서 운영해지는게 가능해졌기 때문에 굳이 이렇게 하는 상황은 요즘에는 있지는 않을겁니다.
+
+or
+
+H2 인메모리 DB의 경우, 사용자 dispatcher servlet과는 별개의 서블릿을 등록하여 해당 매핑 주소에서 
+DB콘솔을 사용자에게 제공하는 역할을 합니다. 이처럼 사용자 애플리케이션과는 다른 부가 기능을 제공하는 경우에 유용하게 사용할 수도 있습니다.
+```
 
 - 참고 
     - [서블릿과 스프링에서 Context(컨텍스트)란?](https://linked2ev.github.io/spring/2019/09/15/Spring-5-서블릿과-스프링에서-Context(컨텍스트)란/)
+    - [dispatcherServlet 2개 이상 쓰는 상황](https://okky.kr/article/636063?note=1810641)
     - [stackoverflow](https://stackoverflow.com/questions/31931848/applicationcontext-and-servletcontext)
 
 ## ExceptionTranslationFilter
@@ -367,3 +389,4 @@ Intercept에서 토큰의 유효성 검사해 또 인증 인가를 한 번 더 �
     - [(Spring)Filter와 Interceptor의 차이](https://meetup.toast.com/posts/151)
     - [Spring의 Filter 와 Interceptor 에 대하여](https://jins-dev.tistory.com/entry/Spring의-Filter-와-Interceptor-에-대하여)
     - [ApplicationContext](https://hoonmaro.tistory.com/31)
+
