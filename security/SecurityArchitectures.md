@@ -131,7 +131,7 @@ DB콘솔을 사용자에게 제공하는 역할을 합니다. 이처럼 사용�
 AccessDeniedException과 AuthenticationException을 처리하는 필터입니다. 핵심 메서드는 HandleSpringSecurityException()입니다.
 해당 필터가 실행되면 doFilter로 바로 넘어갑니다. 만약 인증 과정 중 AuthenticationException 예외가 발생한다면, AuthenticationEntryPoint를 실행하여 인증을 유도합니다.
 
-HandleSpringSecurityExcepti() 내부에서 일어나는 일들입니다.
+HandleSpringSecurityException() 내부에서 일어나는 일들입니다.
 1. SecurityContext Clear off
 2. request cache에 HttpServletRequest를 저장해두고 인증에 다시 성공했을 때 가져와서 씁니다.
 3. credentials 을 요청하기 위해 AuthenticationEntryPoint 를 사용합니다. 예를 들어 log in 페이지로 rediect 와 헤더에 WWW-Authenticate를 보냅니다.
@@ -147,7 +147,7 @@ OAuth2 의 경우 Default AuthenticationEntryPoint 는 /oauth/authentication입�
 
 ### 주의
 ExceptionTranslationFilter가 모든 SecurityFilter의 AuthenticationException, AccessDeniedException예외 처리를 담당하는 것은 아닙니다.
-만약 AbstractAuthenticationProce 를 상속받은 필터에서 AuthenticationException이 터진다면 내부에서 catch로 잡아 unsuccessfulAuthentication 를 실행시킵니다.
+만약 AbstractAuthenticationProcessingFilter 를 상속받은 필터에서 AuthenticationException이 터진다면 내부에서 catch로 잡아 unsuccessfulAuthentication 를 실행시킵니다.
 저희 서비스에서는 OAuth2를 사용하기 때문에 OAuth2LoginAuthenticationFilter 에서 catch 될 것입니다.
 - AbstractAuthenticationProcessingFilter_doFilter
 ![AbstractAuthenticationProcessingFilter_doFilter](../images/security/AbstractAuthenticationProcessingFilter_doFilter.png)
