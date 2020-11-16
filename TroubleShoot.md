@@ -7,7 +7,7 @@ OAuth는 인터넷 사용자들이 비밀번호를 제공하지 않고 다른 �
 - 인증은 시스템 접근을 확인하는 것 (로그인) -> 인증만 하는 것은 [openID](https://coffeewhale.com/kubernetes/authentication/oidc/2020/05/04/auth03/)
 - 권한은 행위의 권리를 검증하는 것
 
-![](../images/security/oauth.png)
+![](images/security/oauth.png)
 1. 사용자는 우리서비스에 oauth로 이용하기로 하고 접근을 하면 우리 서비스는 client id, clientSecret, redirect url을 함께 로그인 요청을 보낸다. 
 2. Authorization sever는 로그인 페이지를 제공한다. (사용자 인증)
 3. 사용자가 로그인을 하면 임시코드인 Authorization code(만료시간이 있음)를 우리서비스가 보낸 redirect uri 와 등록된 redirect url가 동일한지 확인하고 해당 url로 redirect 한다. 
@@ -92,15 +92,6 @@ JPA로 구현할 수 있을 거라 생각했다. 또 JPA는 ORM이다.
 간단하지만 강력하게 구현 할 수 있는 이미 높은 보안 수준을 구축해둔 Spring Security를 사용하기로 선택했습니다.
 Spring Security는 강력하면서도 쉽습니다. 게다가 단 몇십 줄의 코드만으로도 대형 웹서비스 사와 비슷한 수준의 보안을 유지할 수 있다는 장점이 있습니다.
 Spring Security는 스프링 기반의 애플리케이션에서 보안을 위해 **인증**과 **권한 부여**를 사용하여 **접근을 제어**하는 프레임워크입니다. 또 커스터마이징이 가능합니다.
-
-### 변경해 나갈 사항
-- 로그인 지속하기 해결하기
-    1. Sliding Sessions 전략을 사용해 어떤 요청이 있을때 토큰을 재발급하도록
-    2. refreshToken
-- Nginx를 호스트로 돌리고 있어서 8080을 Listen 하는 도커와 포트가 겹처 WAS 에 직접적으로 접근이 가능하다.
-    - 일단 nginx 를 도커에 컨테이너로 띄워놓고 연결만 하면 되는 상황이다.
-    - 해당이 이슈에 자세한 내용은 [PR](https://github.com/woowacourse-teams/2020-seller-lee-company/issues/154) 참고
-- 각 Api와 Chat 서버가 멀티모듈로 돌고있는 상황이다. Chat 서버는 Api보다 호출이 적을 것이다. 운영방식을 다르게 가져가야하는 상황
 
 <!--
 ### 어려웠던게 뭔지 해결하기위해 뭐했는지
