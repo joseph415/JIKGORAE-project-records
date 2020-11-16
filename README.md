@@ -29,12 +29,13 @@ api
   ├── article
   │   ├── application
   │   ├── domain
+  │   ├── exception
   │   ├── presentation
   │   └── query
-  ├── articleFavoriteCount
+  ├── articlefavoritecount
   │   ├── application
   │   └── domain
-  ├── articleOrganization
+  ├── articleorganization
   │   ├── application
   │   └── domain
   ├── chatroom
@@ -43,26 +44,26 @@ api
   │   ├── presentation
   │   └── query
   ├── common
-  │   └── config
-  ├── evaluation
-  │   ├── application
-  │   ├── domain
-  │   └── presentation
+  │   ├── aop
+  │   ├── config
+  │   └── exception
   ├── favorite
   │   ├── application
   │   ├── domain
-  │   └── presentation
+  │   ├── presentation
+  │   └── query
   ├── member
   │   ├── application
-  │   ├── domain
   │   └── presentation
   ├── memberOrganization
   │   ├── application
   │   ├── domain
+  │   ├── exception
   │   └── presentation
   ├── organization
   │   ├── application
   │   ├── domain
+  │   ├── exception
   │   ├── presentation
   │   └── query
   ├── security
