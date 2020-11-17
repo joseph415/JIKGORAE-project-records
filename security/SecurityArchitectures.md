@@ -170,6 +170,8 @@ ExceptionTranslationFilter바로 뒤에 실행되는 FilterSecurityInterceptor �
 따라서 해당 이슈를 해결하기 위해 GernericFilterBean 으로 변경하던가 try catch로 response에 직접 status 값을 넣어주면 해결되었습니다.
 
 - 참고
+    - [/error 처리1](https://supawer0728.github.io/2019/04/04/spring-error-handling/)
+    - [/error 처리2](https://medium.com/@hyunalee419/spring-boot-custom-error-page-4258cd37f05c)
     - [OncePerRequestFilter 와 일반 Filter 의 차이점은 무엇일까요?](https://github.com/TheDevLuffy/TIL/issues/11)
     - [ spring boot /error redirect ](https://serverwizard.tistory.com/68)
     - [ why spring boot filter call twice?](https://stackoverflow.com/questions/44775539/why-spring-boot-filter-call-twice)
