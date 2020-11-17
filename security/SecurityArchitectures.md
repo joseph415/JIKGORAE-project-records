@@ -157,14 +157,22 @@ ExceptionTranslationFilter가 모든 SecurityFilter의 AuthenticationException, 
     - [엔푸푸](https://pupupee9.tistory.com/112)
 
 ### 해당 필터 관련 troubleShooting
-JwtAuthentocationFilter를 만들때 계속 AuthenticationException를 캐치를 못 하는 상황이 발생했었습니다.
-원인은 OncePerRequestFilter 내부 doInternalFilter 메서드에 있었습니다. 코드를 보면 해당 doInternalFilter가 try catch로 감싸죠 있었습니다.
-![doInternalFilter](../images/security/OcnePerRequest_doInternalFilter.png)
+JwtAuthentocationFilter를 만들때 계속 AuthenticationException를 캐치를 못 하는 상황이 발생했습니다.
+
+여러가지 이유가 있었는데 첫번째로 ExceptionTranslationFilter의 잘못된 이해로 인해 발생했습니다.
+ExceptionTranslationFilter는 FilterSecurityInterceptor와 밀접합 관련이 있습니다. 처음엔 ExceptionTranslationFilter가 Security의 모든 예외 처리를 하는 줄 알고 있었지만
+ExceptionTranslationFilter바로 뒤에 실행되는 FilterSecurityInterceptor 필터의 예외처리를 담당하던 필터였습니다.
+
+그리고 Spring boot 의 생각하지 못했던 기본설정이였습니다. spring boot는 exception 발생 시 default로 /error로 redirect를 해줍니다.
+따라서 filter를 2번 타게된다는 말이죠. 첫 요청때 JwtAuthentocationFilter에서 Exception을 터트리고 해당 필터는 OncePerRequestFilter 이므로
+다음 /error요청때는 불리지 않게 됩니다. 따라서 제가 원했던 시나리오가 발생하지 않았던 것입니다.
 
 따라서 해당 이슈를 해결하기 위해 GernericFilterBean 으로 변경하던가 try catch로 response에 직접 status 값을 넣어주면 해결되었습니다.
-![OnecPerRequestFilter](../images/security/JwtTAuthenticationFilter.png)
+
 - 참고
     - [OncePerRequestFilter 와 일반 Filter 의 차이점은 무엇일까요?](https://github.com/TheDevLuffy/TIL/issues/11)
+    - [ spring boot /error redirect ](https://serverwizard.tistory.com/68)
+    - [ why spring boot filter call twice?](https://stackoverflow.com/questions/44775539/why-spring-boot-filter-call-twice)
 ---
 # Authentication Architectures
 ![authentication_architecture](../images/security/authentication_architecture.png)
