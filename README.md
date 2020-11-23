@@ -102,7 +102,7 @@ chat
     + [Back](#back)
   * [Spring Securtiy](#spring-securtiy)
   * [HTTPS](#https)
-  * [고민들](#고민들)
+  * [왜 이 기술스택을 사용했나?](#왜 이 기술스택을 사용했나?)
   
 ## 도메인 설계
 첫 도메인 설계 때 많은 회의를 하였습니다. 그중 가장 화두가 됐던 것은 **DDD 패턴을 적용할까?** 입니다.
@@ -153,9 +153,9 @@ JPA를 학습하고 적용해보고 싶었던 우리는 DDD 에 맞게 단순히
 
 🔒[HTTPS](security/https.md)
 
-### 고민들
+### 왜 이 기술스택을 사용했나?
 
-🤵[고민들](TroubleShoot.md)
+🤵[왜 이 기술스택을 사용했나?](TroubleShoot.md)
 
 # Level 4
  * [도메인](#도메인)
