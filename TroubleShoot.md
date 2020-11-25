@@ -1,31 +1,15 @@
-### OAuth2 과정
-OAuth는 인터넷 사용자들이 비밀번호를 제공하지 않고 다른 웹사이트 상의 자신들의 정보에 대해 
-웹사이트나 애플리케이션의 접근 권한을 부여할 수 있는 공통적인 수단으로서 사용되는, 접근 위임을 위한 개방형 표준이다
+### 왜 Spring Securtiy 인가?
+우선 시큐리티를 적용하기 전에 Form 형식의 회원가입을 통해 Member를 생성하였다. 그러던 도중 우연히 Stored XSS 를 알게 되었고
+여럿 팀들에게 새벽에 몰래 적용해 보았다. 결과는 놀랍겠도 쉽게 공격이 먹혔다. 이 사건을 계기로 단순히 Https만 적용한다고 사이트의 보안이 충분히 이루어지는 것이
+아니구나 라고 생각했고 높으 보안 수준을 구축해둔 Spring Security를 이용해 대형 웹서비스사와 비슷한 수준의 보안을 유지하려고 사용했다.
+실제 운영될 서비스이기 때문에 보안에 좀더 신경쓰고 싶었고 물론 인증 인가에대해 시큐리티를 안쓰고 구현할 수 있지만
+이미 높은 보안 수준을 다 구축해둔 스프링 시큐리티를 사용한다면 좀더 안전한 서비스가 되지 않을까 생각했다.
 
-사용자가 서비스에게 접근 권한을 위임한다고 생각할 수 있다.
-
-- 인증은 시스템 접근을 확인하는 것 (로그인) -> 인증만 하는 것은 [openID](https://coffeewhale.com/kubernetes/authentication/oidc/2020/05/04/auth03/)
-- 권한은 행위의 권리를 검증하는 것
-
-![](images/security/oauth.png)
-1. 사용자는 우리서비스에 oauth로 이용하기로 하고 접근을 하면 우리 서비스는 client id, clientSecret, redirect url을 함께 로그인 요청을 보낸다. 
-2. Authorization sever는 로그인 페이지를 제공한다. (사용자 인증)
-3. 사용자가 로그인을 하면 임시코드인 Authorization code(만료시간이 있음)를 우리서비스가 보낸 redirect uri 와 등록된 redirect url가 동일한지 확인하고 해당 url로 redirect 한다. 
-4. 우리 서비스는 받은 코드를 이용해 AccessToken을 요청하고 발급받으면 **이제 서비스는 사용자에게 접근권한을 위임받은 것이다.** (Authorization code로 client 인증)
-
-### OAuth 취약점
-피싱사이트를 이용해 여러개 연동을 할 수 있는 서비스에 공격자의 계정을 등록할 수 있다.
-Authorization 값을 공격자의 값으로 바꿔치키 한다면 피해자가 가입한 계정은 공격자의 계정으로 가입이 될 것이다.
-[참고](https://aboutsc.tistory.com/200?category=671894)
-
-- 해결법
-state 파라미터를 사용한다. 인증요청시 추측할 수 없는 파라미터를 보내 인증과정에서 사용.
-
-### Security 측
-- OAuth2AuthorizationRequestRedirectFilter 가 있는데 "/oauth/authentication/kakao" 이라는 url로 요청이 오면
-client id, clientSecret, redirect url을 함께 로그인 요청을 보낸다.code를 authorizationEndpoint인 ("/login/oauth/code/kakao")로 지정된 redirect url을 보내면
-해당 필터인 OAuth2LoginAuthenticationFilter가 동작을 한다. 그렇게 온 요청에 대해 Authentication을 하고 저장한다.
-완료되면 Authentication을 하고 아니면 익명이 되어 다시 Authentication하기위해 entrypoint로 보내진다. 
+### 왜 OAuth2 인가?
+보안의 수준을 알 수 없는 애플리케이션에서 일일이 계정을 만들어 사용하면 ID/PW관리가 어렵고 개인정보가 유출되면 연쇄적으로 피해가 심각해질 수 있기 때문에 
+보안의 수준이 어느정도 검증된 사이트(OAuth provider(ex. google, facebook))의 API를 이용해서 인가 위임해 접근 권한을 받는 방법(OAuth)이 보안상 좋기 때문이다.
+스프링 시큐리티를 사용한이유와 비슷하다. OAuth를 사용하지 않으면 Password가 노출이 될 수 있다. 그래서 이미 보안수준이 검증된 대형 서비스에게 인가 프로세스를 대신 위임하는
+OAuth를 이용해 보안상 안전한 인증인가를 구현하고 싶었다.
 
 ### 왜 JWT 인가?
 Session을 사용하면 서버 확장시 세션정보의 동기화 문제가 있습니다. 초반에 무중단 배포를 하고자 했기에 동시성문제를 해결하는데 비용이 크다고 생각했ㄷ.
@@ -86,12 +70,6 @@ JPA로 구현할 수 있을 거라 생각했다. 또 JPA는 ORM이다.
 ### 왜 MariaDB?
 학습해야할 기술 스택들이 많았기 때문에 크루들 모두가 알고있어 쉽게 다가갈수 있는 Mysql과 고민을 했다. 그 중 가장 큰 이유는 일단 무료이다.
 그리고 Mysql보다 빠르고 가볍다. Mysql과 높은 호환성을 갖는다. MySQL에서 MariaDB로 바꾼 사례가 있다고 한다. 
-
-### 왜 Security?
-'실제 운영해야 할 서비스이기 때문에 개인정보에 대한 보안에 신경 써야 하지 않을까?'라고 생각했고 보안 수준을 높일 방법이 뭐가 있을까 생각을 하였을 때
-간단하지만 강력하게 구현 할 수 있는 이미 높은 보안 수준을 구축해둔 Spring Security를 사용하기로 선택했습니다.
-Spring Security는 강력하면서도 쉽습니다. 게다가 단 몇십 줄의 코드만으로도 대형 웹서비스 사와 비슷한 수준의 보안을 유지할 수 있다는 장점이 있습니다.
-Spring Security는 스프링 기반의 애플리케이션에서 보안을 위해 **인증**과 **권한 부여**를 사용하여 **접근을 제어**하는 프레임워크입니다. 또 커스터마이징이 가능하다.
 
 <!--
 ### 어려웠던게 뭔지 해결하기위해 뭐했는지
