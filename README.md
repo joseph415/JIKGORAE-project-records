@@ -150,11 +150,11 @@ JPA를 학습하고 적용해보고 싶었던 우리는 DDD 에 맞게 단순히
 
 🔑[Spring Security Architectures](security/SecurityArchitectures.md)
 
-### HTTPS
+## HTTPS
 
 🔒[HTTPS](security/https.md)
 
-### OAuth2
+## OAuth2
 
 🔒[OAuth2](security/OAuth.md)
 
