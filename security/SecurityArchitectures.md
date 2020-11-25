@@ -11,6 +11,7 @@
   * [Authentication Flow](#authentication-flow)
   * [AuthenticationManager](#authenticationmanager)
   * [ProviderManager](#providermanager)
+  * [Security 어디에서 Redirect가 일어날까](#security-어디에서-redirect가-일어날까)
   * [AbstractAuthenticationProcessingFilter](#abstractauthenticationprocessingfilter)
 - [Authorization Architecture](#authorization-architecture)
   * [AccessDecisionManager](#accessdecisionmanager)
@@ -268,6 +269,12 @@ parent는 없어도 괜찮습니다. local AuthenticationManager를 잘 등록�
 ![OAuth2LoginConfigureation](../images/security/OAuth2LoginConfigureation.png)
 
 **ProviderManager.java** 의 authenticate(Authenticate )를 보면 흐름을 알 수 있습니다.
+
+## Security 어디에서 Redirect가 일어날까
+- OAuth2AuthorizationRequestRedirectFilter 가 있는데 "/oauth/authentication/kakao" 이라는 url로 요청이 오면
+client id, clientSecret, redirect url을 함께 로그인 요청을 보낸다.code를 authorizationEndpoint인 ("/login/oauth/code/kakao")로 지정된 redirect url을 보내면
+해당 필터인 OAuth2LoginAuthenticationFilter가 동작을 한다. 그렇게 온 요청에 대해 Authentication을 하고 저장한다.
+완료되면 Authentication을 하고 아니면 익명이 되어 다시 Authentication하기위해 entrypoint로 보내진다.
 
 ## AbstractAuthenticationProcessingFilter
 AbstractAuthenticationProcessingFilter 는 유저의 credentials를 인증하기 위해서 사용되는 필터입니다.
