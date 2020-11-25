@@ -1,17 +1,10 @@
-- [왜 Spring Securtiy 인가?](#왜-spring-securtiy-인가)
-  * [Spring Security가 제공하는 기능들](#spring-security가-제공하는-기능들)
+- [Spring Security가 제공하는 기능들](#spring-security가-제공하는-기능들)
 - [Spring Security의 꼭 알아야할 내용](#spring-security의-꼭-알아야할-내용)
   * [왜 알아야 할까?](#왜-알아야-할까)
   * [용어](#용어)
   * [SecurityContextHolder](#securitycontextholder)
   * [ThreadLocal](#threadlocal)
   * [헷갈렸던 부분](#헷갈렸던-부분)
-# 왜 Spring Securtiy 인가?
-우선 시큐리티를 적용하기 전에 Form 형식의 회원가입을 통해 Member를 생성하였습니다.
-하지만 '실제 운영해야 할 서비스이기 때문에 개인정보에 대한 보안에 신경 써야 하지 않을까?'라고 생각했고 보안 수준을 높일 방법이 뭐가 있을까 생각을 하였을 때
-간단하지만 강력하게 구현 할 수 있는 이미 높은 보안 수준을 구축해둔 Spring Security를 사용하기로 선택했습니다.
-Spring Security는 강력하면서도 쉽습니다. 게다가 단 몇십 줄의 코드만으로도 대형 웹서비스 사와 비슷한 수준의 보안을 유지할 수 있다는 장점이 있습니다.
-Spring Security는 스프링 기반의 애플리케이션에서 보안을 위해 **인증**과 **권한 부여**를 사용하여 **접근을 제어**하는 프레임워크입니다. 또 커스터마이징이 가능합니다.
 
 ## Spring Security가 제공하는 기능들
 ![security-features](../images/security/security_features.png)
