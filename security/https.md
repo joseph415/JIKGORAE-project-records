@@ -87,7 +87,7 @@ Encryption key(대칭키)와 Mac key를 계산한다.
 
 ### protocol
 ```
-ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+ssl_protocols TLSv1.1 TLSv1.2;
 ```
 사용할 프로토콜을 나타냅니다. SSL 프로토콜은 너무 오래됐기때문에 이제 지원하지 않는다. 
 그러나 보안을 더 고려한다면 TLSv1.0과 TLSv1.1 지원을 중단하는 것이 좋다고 한다. 이미 TLSv1.0은 시장에서 지원이 중단된 상태이기도 한다.
