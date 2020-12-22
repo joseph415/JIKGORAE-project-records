@@ -106,9 +106,8 @@ chat
   * [왜 이 기술스택을 사용했나?](#왜-이-기술스택을-사용했나?)
   
 ## 도메인 설계
-도메인 설계르 할 때 도메인을 관심사 별로 묶고 **모듈 간의 의존성은 최소화하고, 응집성은 최대화** 할 수 있는 Layered Architecture 따라 설계를 하였습니다.
+도메인 설계 할 때 도메인을 관심사 별로 묶고 **모듈 간의 의존성은 최소화하고, 응집성은 최대화** 할 수 있는 Layered Architecture 따라 설계를 하였습니다.
 
-- Spring data 쓰다 보면 Aggregate 개념을 적용하게 됩니다. ([참고](https://www.slideshare.net/HyeonSeokChoi/ddd-repository)) 그래서 변경단위를 어떻게 가져가야 할 것인가에 대한 고민이 있었습니다.
 - DDD의 핵심 목표 중 하나인 "Loosely coupling" 은 복잡한 연관 관계가 적용되면 연관된 객체에 대해 변경의 일관성을 유지하기 힘듭니다. 따라서 객체 참조보다
 Id 참조를 함으로써 연관 관계를 없애 일관성을 더 쉽게 유지고할 수 있다. 하지만 JPA를 학습하고 적용해보고 싶어 Spring data JDBC 와 Spring data JPA 중 JPA를 선택했습니다.
 
