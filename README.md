@@ -133,8 +133,6 @@ Id 참조를 함으로써 연관 관계를 없애 일관성을 더 쉽게 유지
 - docker 컨테이너 기반으로 무중단 서버 배포 구현
     - Blue-Green 방식의 배포전략을 사용해 무중단 배포 서버 구현 
 
-프로젝트에서 혼자서 맡게 된 기술들입니다. 새로운 기술을 적용하면서 공부했던 방법과 내용, 고민들을 공유하겠습니다.
-
 ## Spring Securtiy
 🔒[Spring Security란?](security/Security.md)
 
