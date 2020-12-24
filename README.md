@@ -94,6 +94,19 @@ chat
       └── presentation
 ```
 
+## 프로젝트에서 맡은 주된 업무
+- React-Native를 이용해 모바일 애플리케이션의 컴포넌트와 스크린을 개발
+    - 닉네임 수정, 게시글 상세 조회, 태그, 판매상태 등 다양한 컴포넌트, 스크린 개발
+- 게시글 상세조회 API와 판매내역에 관한 API를 개발
+- 전체 아티클 조회 시 VO 일급컬렉션에 의해 N+1 조회를 발견해 해당부분을 개선해서 쿼리수를 크게 줄였습니다.
+- 회원가입/로그인 개발(Spring Security, Kakao OAuth)
+    - JWT 인증 Filter를 구현하여 OAuth 인증/인가필터 앞단에서 토큰의 유효성을 판별 후, Authentication객체를 SecurityContextHolder에 넣어 그 이후의 불필요한 로직이 실행되지 않도록 구현
+- 보안 서버 구축
+    - Https 를 적용하였고 더 나아가 다양한 보안헤더를 통해 보안서버를 구축
+    - SSL 헤더 설정을 통해 모질라와 퀄리스에서 제공하는 SSL server test에서 제일 좋은 스코어(A+)를 받음
+- docker 컨테이너 기반으로 무중단 서버 배포 구현
+    - Blue-Green 방식의 배포전략을 사용해 무중단 배포 서버 구현 
+
 # Level 3
   * [도메인 설계](#도메인-설계)
   * [첫번째 클레스 다이어그램](#첫번째-클레스-다이어그램)
@@ -120,18 +133,6 @@ Id 참조를 함으로써 연관 관계를 없애 일관성을 더 쉽게 유지
     
 ## 첫번째 클레스 다이어그램
 ![Lv3도메인](images/Lv3_domain.png) 
-
-## 프로젝트에서 맡은 주된 업무
-- React-Native를 이용해 모바일 애플리케이션의 컴포넌트와 스크린을 개발
-    - 닉네임 수정, 게시글 상세 조회, 태그, 판매상태 등 다양한 컴포넌트, 스크린 개발
-- 게시글 상세조회 API와 판매내역에 관한 API를 개발
-- 회원가입/로그인 개발(Spring Security, Kakao OAuth)
-    - JWT 인증 Filter를 구현하여 OAuth 인증/인가필터 앞단에서 토큰의 유효성을 판별 후, Authentication객체를 SecurityContextHolder에 넣어 그 이후의 불필요한 로직이 실행되지 않도록 구현
-- 보안 서버 구축
-    - Https 를 적용하였고 더 나아가 다양한 보안헤더를 통해 보안서버를 구축
-    - SSL 헤더 설정을 통해 모질라와 퀄리스에서 제공하는 SSL server test에서 제일 좋은 스코어(A+)를 받음
-- docker 컨테이너 기반으로 무중단 서버 배포 구현
-    - Blue-Green 방식의 배포전략을 사용해 무중단 배포 서버 구현 
 
 ## Spring Securtiy
 🔒[Spring Security란?](security/Security.md)
