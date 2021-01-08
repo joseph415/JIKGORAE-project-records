@@ -24,6 +24,8 @@
 사용자의 피드백을 적극 반영하기 위해 짧은 주기로 서비스를 배포하고 있습니다.
 잦은 빌드와 배포로 인해 번거로움을 느꼈고 CI/CD 환경을 구성하여문제를 해결하였습니다.
 ## 패키지 구조
+도메인 설계 할 때 도메인을 관심사 별로 묶고 **모듈 간의 의존성은 최소화하고, 응집성은 최대화** 할 수 있도록 Layered Architecture 따라 설계를 하였습니다.
+
 ```gherkin
 api
   ├── article
@@ -109,29 +111,13 @@ chat
 
 # Level 3
   * [도메인 설계](#도메인-설계)
-  * [첫번째 클레스 다이어그램](#첫번째-클레스-다이어그램)
-  * [프로젝트에서 맡은 주된 업무](#프로젝트에서-맡은-주된-업무)
-    + [Front](#front)
-    + [Back](#back)
   * [Spring Securtiy](#spring-securtiy)
   * [HTTPS](#https)
   * [Oauth2](#oauth2)
   * [왜 이 기술스택을 사용했나?](#왜-이-기술스택을-사용했나?)
   
-## 도메인 설계
-도메인 설계 할 때 도메인을 관심사 별로 묶고 **모듈 간의 의존성은 최소화하고, 응집성은 최대화** 할 수 있는 Layered Architecture 따라 설계를 하였습니다.
-
-- DDD의 핵심 목표 중 하나인 "Loosely coupling" 은 복잡한 연관 관계가 적용되면 연관된 객체에 대해 변경의 일관성을 유지하기 힘듭니다. 따라서 객체 참조보다
-Id 참조를 함으로써 연관 관계를 없애 일관성을 더 쉽게 유지고할 수 있다. 하지만 JPA를 학습하고 적용해보고 싶어 Spring data JDBC 와 Spring data JPA 중 JPA를 선택했습니다.
-
-- 참고
-    - [Domain-Driven Design and MVC Architectures](https://blog.fedecarg.com/2009/03/11/domain-driven-design-and-mvc-architectures/)
-    - [카카오헤어샵의 DDD](https://brunch.co.kr/@cg4jins/7) 
-    - [DDD 핵심만 빠르게](https://happycloud-lee.tistory.com/94)
-    - [DDD, Aggregate](https://medium.com/@chanhyeonglee/ddd-aggregate-애그리거트-98d9c1313c23)
-    - [애그리게잇 하나에 리파지토리 하나](https://medium.com/@SlackBeck/애그리게잇-하나에-리파지토리-하나-f97a69662f63)
     
-## 첫번째 클레스 다이어그램
+## 도메인 설계
 ![Lv3도메인](images/Lv3_domain.png) 
 
 ## Spring Securtiy
