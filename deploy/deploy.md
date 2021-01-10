@@ -118,7 +118,7 @@ then
                 sudo sed -i "s/$CONTAINER_ONE_IP:$SERVER1;/$CONTAINER_TWO_IP:$SERVER2;/g" /etc/nginx/sites-available/service-url.inc
                 docker exec nginx nginx -s reload
                 docker stop springboot1
-[comment]: <> (docker rm springboot1)
+<!-- docker rm springboot1 -->
                 echo " > CONTAINER_IP: $CONTAINER_ONE_IP 종료"
         fi
 
@@ -166,7 +166,7 @@ then
 		done
                 docker exec nginx nginx -s reload
                 docker stop springboot2
-[comment]: <> (docker rm springboot2)
+<!-- docker rm springboot2 -->
                 echo " > CONTAINER_IP: $CONTAINER_TWO_IP 종료"
         fi
 fi  
