@@ -171,6 +171,7 @@ fi
 ``` 
 
 - 참고
+    - [https://jojoldu.tistory.com/267](https://jojoldu.tistory.com/267)
     - [https://reference-m1.tistory.com/211](https://reference-m1.tistory.com/211)
     - [https://onlywis.tistory.com/10](https://onlywis.tistory.com/10)
     - [https://tech.devsisters.com/posts/blue-green-canary-deployment/](https://tech.devsisters.com/posts/blue-green-canary-deployment/)
