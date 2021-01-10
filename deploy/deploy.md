@@ -79,10 +79,10 @@ then
         IDLE_PROFILE=$SERVER2
         IDLE_PORT=8081
 
-        sudo docker build --force-rm -t chat .
-        sudo docker rmi $(docker images -f "dangling=true" -q)
+        sudo docker build --force-rm -t springboot .
+	sudo docker rmi $(docker images -f "dangling=true" -q)
         sudo docker stop springboot2
-        sudo docker rm $(sudo docker ps -a -f "name=springboot2" -q)
+	sudo docker rm $(sudo docker ps -a -f "name=springboot2" -q)
         sudo docker run -d -p 8081:8081 --volume /home/ubuntu/seller-lee/log:/back/build/libs/log --name springboot2 springboot
         CONTAINER_ONE_IP=`sudo docker inspect -f "{{ .NetworkSettings.IPAddress }}" springboot1`
         CONTAINER_TWO_IP=`sudo docker inspect -f "{{ .NetworkSettings.IPAddress }}" springboot2`
@@ -118,7 +118,7 @@ then
                 sudo sed -i "s/$CONTAINER_ONE_IP:$SERVER1;/$CONTAINER_TWO_IP:$SERVER2;/g" /etc/nginx/sites-available/service-url.inc
                 docker exec nginx nginx -s reload
                 docker stop springboot1
-                docker rm springboot1
+[comment]: <> (docker rm springboot1)
                 echo " > CONTAINER_IP: $CONTAINER_ONE_IP 종료"
         fi
 
@@ -128,7 +128,7 @@ then
         IDLE_PROFILE=$SERVER1
         IDLE_PORT=8080
 
-        sudo docker build --force-rm -t chat .
+        sudo docker build --force-rm -t springboot .
         sudo docker rmi $(docker images -f "dangling=true" -q)
         sudo docker stop springboot1
         sudo docker rm $(sudo docker ps -a -f "name=springboot1" -q)
@@ -166,7 +166,7 @@ then
 		done
                 docker exec nginx nginx -s reload
                 docker stop springboot2
-                docker rm springboot2
+[comment]: <> (docker rm springboot2)
                 echo " > CONTAINER_IP: $CONTAINER_TWO_IP 종료"
         fi
 fi  
