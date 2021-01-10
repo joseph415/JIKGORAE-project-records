@@ -91,7 +91,7 @@ then
         then
 		        for retry_count in {1..10}
 			do
-                        response=$(curl -s https://${CONTAINER_TWO_IP}:${SERVER2})
+                        response=$(curl -s https://${CONTAINER_TWO_IP}:${SERVER2}/health)
                         count=$( echo $response | grep Download | wc -l)
 
                         if [ $count -ge 1 ]
@@ -142,7 +142,7 @@ then
 		echo " > 변경할 SERVER_PORT: $SERVER1 , CONTAINER_IP: $CONTAINER_ONE_IP 실행 완료"
                	for retry_count in {1..10}
                	do
-                      	response=$(curl -s https://${CONTAINER_ONE_IP}:${SERVER1})
+                      	response=$(curl -s https://${CONTAINER_ONE_IP}:${SERVER1}/health)
                        	count=$( echo $response | grep Download | wc -l)
 
                        	if [ $count -ge 1 ]
