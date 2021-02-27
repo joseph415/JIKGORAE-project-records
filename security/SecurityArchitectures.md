@@ -402,7 +402,16 @@ Intercept에서 토큰의 유효성 검사해 또 인증 인가를 한 번 더 �
 
 따라서 JwtAuthenticationFilter 늘 만들기로 하였습니다.
 
+JwtAuthenticationFilter를 만든다고 AbstractAuthenticationProcessingFilter 를 거치지 않느 것은 아닙니다.
+AbstractAuthenticationProcessingFilter에서 해당 필터를 거칠필요가 있는 url인지 먼저 확인하고 (oauth 같은 경우 /login/oauth2/code/* )
+match가 된다면 필터를 거쳐 요청을 통해 만든 Authentication 에 대해 인증을 거쳐 AuthenticationProvider 를 통해 진짜 Authentication을 만들어 냅니다.
+JwtAuthenticationFilter를 통해 ProcessingFilter 과정을 생략할 수 있는데 securityContextHolder에 인증객체를 넣어 인가과정까지 거쳐 권한이 확인이 되면
+ProcessingFilter 를 안거치게 됩니다.
+
+만약 JwtAuthenticationFilter가 없다면 session 을 사용하지 않기 때문에 매 요청마다 익명객체로 여겨져 권한에서 필터링되서 /login/oauth2/code/* 로 redirect되서 ProcessingFilter가 계속 거칠 것이다.
+
 - 참고
+    - [정프로](https://jeong-pro.tistory.com/205)
     - [(Spring)Filter와 Interceptor의 차이](https://meetup.toast.com/posts/151)
     - [Spring의 Filter 와 Interceptor 에 대하여](https://jins-dev.tistory.com/entry/Spring의-Filter-와-Interceptor-에-대하여)
     - [ApplicationContext](https://hoonmaro.tistory.com/31)
