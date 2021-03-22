@@ -25,19 +25,18 @@
 잦은 빌드와 배포로 인해 번거로움을 느꼈고 CI/CD 환경을 구성하여문제를 해결하였습니다.
 
 ## My Task
-- 프로젝트 기여한 내용
-  - 게시글 전체 조회 시 JPA 연관 관계에 의해 나타나는 N+1문제를 발견하고 해결해 성능 개선
-    - 100개의 게시글 전체 조회 시(findAll) 201번의 쿼리를 만들었던 애플리케이션을 3번의 쿼리로 줄이는 성능개선을 함
-  - 게시글 상세조회와 판매내역에 관한 HTTP API를 개발
-  - 회원가입/로그인 개발(Spring Security, Kakao OAuth)
+- 게시글 전체 조회 시 JPA 연관 관계에 의해 나타나는 N+1문제를 발견해 성능 개선
+    - 100개의 게시글 전체 조회 시(findAll) 201번의 쿼리를 만들었던 애플리케이션을 3번의 쿼리로 줄이는 성능 개선을 함
+- 게시글 상세조회와 판매내역에 관한 HTTP API를 개발
+- 회원가입/로그인 개발(Spring Security, Kakao OAuth)
     - Form 형식의 로그인을 OAuth로 변경
     - Spring Interceptor 기반이었던 JWT 인증 로직을 Filter로 변경
-  - 보안 서버 구축
+- 보안 서버 구축
     - Https 를 적용하고, Spring Security와 Nginx를 사용해 보안의 취약점을 파악하고 보안 수준을 높임
     - SSL server 등급을 측정할 수 있는 사이트에서 가장 좋은 스코어 획득
-  - docker 컨테이너를 이용해 무중단 서버 배포 구현
+- docker 컨테이너를 이용해 무중단 서버 배포 구현
     - Blue-Green 방식의 배포전략을 사용해 무중단 배포 스크립트 작성
-  - React-Native(TypeScript)를 이용해 모바일 애플리케이션의 컴포넌트와 스크린을 개발
+- React-Native(TypeScript)를 이용해 모바일 애플리케이션의 컴포넌트와 스크린을 개발
     - 닉네임 수정, 게시글 상세 조회, 태그, 판매상태 등 컴포넌트, 스크린 개발
 
 ## Layered Architecture
