@@ -227,3 +227,4 @@ add_header Referrer-Policy "strict-origin-when-cross-origin";
 - 참고
     - [nginx docs](http://nginx.org/en/docs/)
     - [xss](https://chaewonkong.github.io/posts/xss.html)
+    - [ssl 등급](https://happist.com/568685/쇼핑몰-구축기-웹서버-nginx에서-http-보안-헤더security-headers-적용-時)
