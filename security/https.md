@@ -226,3 +226,4 @@ add_header Referrer-Policy "strict-origin-when-cross-origin";
 
 - 참고
     - [nginx docs](http://nginx.org/en/docs/)
+    - [xss](https://chaewonkong.github.io/posts/xss.html)
