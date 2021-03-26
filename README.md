@@ -114,14 +114,18 @@ chat
 
 # Level 3
   * [도메인 설계](#도메인-설계)
+  * [기술스택을 선택한 이유](#기술스택을-선택한-이유)
   * [Spring Securtiy](#spring-securtiy)
   * [HTTPS](#https)
   * [Oauth2](#oauth2)
-  * [왜 이 기술스택을 사용했나?](#왜-이-기술스택을-사용했나?)
   
     
 ## 도메인 설계
 ![Lv3도메인](images/Lv3_domain.png) 
+
+## 기술스택을 선택한 이유
+
+🤵[기술스택을 선택한 이유](TroubleShoot.md)
 
 ## Spring Securtiy
 🔒[Spring Security란?](security/Security.md)
@@ -135,10 +139,6 @@ chat
 ## OAuth2
 
 🔒[OAuth2](security/OAuth.md)
-
-## 왜 이 기술스택을 사용했나?
-
-🤵[왜 이 기술스택을 사용했나?](TroubleShoot.md)
 
 # Level 4
  * [도메인](#도메인)
