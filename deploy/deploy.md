@@ -137,8 +137,6 @@ then
 
         if [ "$(docker ps | grep springboot1)" ]
         then
-                sudo sed -i "s/$CONTAINER_TWO_IP:$SERVER2;/$CONTAINER_ONE_IP:$SERVER1;/g" /etc/nginx/sites-available/service-url.inc
-		echo " > 변경할 SERVER_PORT: $SERVER1 , CONTAINER_IP: $CONTAINER_ONE_IP 실행 완료"
                	for retry_count in {1..10}
                	do
                       	response=$(curl -s https://${CONTAINER_ONE_IP}:${SERVER1}/health)
@@ -163,6 +161,8 @@ then
                        	echo "> Health check 연결 실패. 재시도..."
                        	sleep 10
 		done
+		sudo sed -i "s/$CONTAINER_TWO_IP:$SERVER2;/$CONTAINER_ONE_IP:$SERVER1;/g" /etc/nginx/sites-available/service-url.inc
+		echo " > 변경할 SERVER_PORT: $SERVER1 , CONTAINER_IP: $CONTAINER_ONE_IP 실행 완료"
                 docker exec nginx nginx -s reload
                 docker stop springboot2
                 echo " > CONTAINER_IP: $CONTAINER_TWO_IP 종료"
